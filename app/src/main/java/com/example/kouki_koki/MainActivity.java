@@ -1,68 +1,60 @@
 package com.example.kouki_koki;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
-import android.widget.Button;
-import android.widget.Chronometer;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
-
-    private Button click;
-
+    ImageView img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //change activity when button is pressed
-        click = findViewById(R.id.click);
-        Intent myIntent = new Intent(MainActivity.this, Timer_Activity.class);
-        click.setOnClickListener(new View.OnClickListener() {
+        TextView inspiration = (TextView) findViewById(R.id.titlepage);
+        Typeface quicksand=Typeface.createFromAsset(getAssets(),"fonts/Quicksand-Regular.ttf");
+        inspiration.setTypeface(quicksand);
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://zenquotes.io/api/random/";
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
-            public void onClick(View v) {
-                /*
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "My_notification");
-                builder.setSmallIcon(R.drawable.notif_icon);
-                builder.setContentTitle("Get ready to start!");
-                builder.setContentText("Get your ass into the app my dude");
-                //builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                builder.setAutoCancel(true);
-
-                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(MainActivity.this);
-                managerCompat.notify(1, builder.build());
-                */
-
-
-                MainActivity.this.startActivity(myIntent);
+            public void onResponse(JSONArray response) {
+                for(int i = 0; i<response.length();i++){
+                    try{
+                        JSONObject jsonObject = response.getJSONObject(i);
+                        String quote = jsonObject.getString("q");
+                        String person = jsonObject.getString("a");
+                        inspiration.setText(quote+" -"+person);
+                    } catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("a","Error");
             }
         });
-
-
-
-
+        queue.add(jsonArrayRequest);
     }
-
-
+    public void start(View v){
+        Intent intent = new Intent(this, home.class);
+        startActivity(intent);
     }
-
-
+}

@@ -2,6 +2,7 @@ package com.example.kouki_koki;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Timer_Activity extends AppCompatActivity implements View.OnClickListener {
@@ -22,36 +25,43 @@ public class Timer_Activity extends AppCompatActivity implements View.OnClickLis
     private TextView textViewShowTime;
     private CountDownTimer countDownTimer;
     private long totalTimeCountInMilliseconds;
-    private Queue<Integer> timeMap = new LinkedList<Integer>();
+    private Queue<Integer> timeMap = new LinkedList<>();
     int i = -1;
     ProgressBar mProgressBar, mProgressBar1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
+        Intent intent = getIntent();
+        int[] arr = intent.getIntArrayExtra("interval");
+        for(int x : arr){
+            timeMap.add(x);
+        }
         //setting custom fonts
         Typeface MRegular = Typeface.createFromAsset(getAssets(),"fonts/Quicksand-Bold.ttf");
         Typeface MMedium = Typeface.createFromAsset(getAssets(),"fonts/Quicksand-Medium.ttf");
         //link gui elements to code
         buttonStartTime = (Button) findViewById(R.id.button_timerview_start);
         buttonStopTime = (Button) findViewById(R.id.button_timerview_stop);
-        //to be implemented: returnToMenu = (Button) findViewById(R.id.ReturnToMenu);
+        returnToMenu = (Button) findViewById(R.id.ReturnToMenu);
         buttonStartTime.setTypeface(MRegular);
         buttonStopTime.setTypeface(MRegular);
         textViewShowTime = (TextView) findViewById(R.id.textView_timerview_time);
         //testing
-        //edtTimerValue = (EditText) findViewById(R.id.textview_timerview_back);
         buttonStartTime.setOnClickListener(this);
         buttonStopTime.setOnClickListener(this);
         mProgressBar = (ProgressBar) findViewById(R.id.progressbar_timerview);
         mProgressBar1 = (ProgressBar) findViewById(R.id.progressbar1_timerview);
         textViewShowTime.setTypeface(MRegular);
-        //edtTimerValue.setTypeface(MMedium);
-        //timer test values
-        timeMap.add(10);
-        timeMap.add(5);
-        timeMap.add(125);
-        // TBI: returnToMenu.setVisibility(View.INVISIBLE);
+
+        returnToMenu.setVisibility(View.INVISIBLE);
+
+        returnToMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     //set actions for each button
@@ -74,12 +84,10 @@ public class Timer_Activity extends AppCompatActivity implements View.OnClickLis
                 countDownTimer.onFinish();
                 mProgressBar1.setVisibility(View.GONE);
                 mProgressBar.setVisibility(View.VISIBLE);
-                //testing
-                //edtTimerValue.setVisibility(View.VISIBLE);
                 buttonStartTime.setVisibility(View.VISIBLE);
                 buttonStopTime.setVisibility(View.INVISIBLE);
 
-            }//TBI: else if (v.getId() == R.id.ReturnToMenu){}
+            }
     }
     //pulls timers from time map queue.
     //Continues to pull timers until there are no more left
@@ -126,16 +134,17 @@ public class Timer_Activity extends AppCompatActivity implements View.OnClickLis
                 } else {
                     //if there are no more timers, tell user
                     textViewShowTime.setText("Done!");
-                    //TBI: returnToMenu.setVisibility(View.VISIBLE);
+                    returnToMenu.setVisibility(View.VISIBLE);
                 }
                 //setting visibility for button and progress bars when timer finishes
                 textViewShowTime.setVisibility(View.VISIBLE);
                 buttonStartTime.setVisibility(View.VISIBLE);
-                buttonStopTime.setVisibility(View.VISIBLE);
+                buttonStopTime.setVisibility(View.INVISIBLE);
                 mProgressBar.setVisibility(View.VISIBLE);
                 mProgressBar1.setVisibility(View.GONE);
             }
 
         }.start();
     }
+
 }
