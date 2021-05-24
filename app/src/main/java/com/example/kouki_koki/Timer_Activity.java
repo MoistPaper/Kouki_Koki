@@ -21,7 +21,6 @@ public class Timer_Activity extends AppCompatActivity implements View.OnClickLis
     //private EditText edtTimerValue;
     private TextView textViewShowTime;
     private CountDownTimer countDownTimer;
-
     private long totalTimeCountInMilliseconds;
     private Queue<Integer> timeMap = new LinkedList<Integer>();
     int i = -1;
@@ -30,24 +29,22 @@ public class Timer_Activity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
+        //setting custom fonts
         Typeface MRegular = Typeface.createFromAsset(getAssets(),"fonts/Quicksand-Bold.ttf");
         Typeface MMedium = Typeface.createFromAsset(getAssets(),"fonts/Quicksand-Medium.ttf");
-
+        //link gui elements to code
         buttonStartTime = (Button) findViewById(R.id.button_timerview_start);
         buttonStopTime = (Button) findViewById(R.id.button_timerview_stop);
         //to be implemented: returnToMenu = (Button) findViewById(R.id.ReturnToMenu);
         buttonStartTime.setTypeface(MRegular);
         buttonStopTime.setTypeface(MRegular);
-
         textViewShowTime = (TextView) findViewById(R.id.textView_timerview_time);
         //testing
         //edtTimerValue = (EditText) findViewById(R.id.textview_timerview_back);
-
         buttonStartTime.setOnClickListener(this);
         buttonStopTime.setOnClickListener(this);
         mProgressBar = (ProgressBar) findViewById(R.id.progressbar_timerview);
         mProgressBar1 = (ProgressBar) findViewById(R.id.progressbar1_timerview);
-
         textViewShowTime.setTypeface(MRegular);
         //edtTimerValue.setTypeface(MMedium);
         //timer test values
@@ -55,13 +52,13 @@ public class Timer_Activity extends AppCompatActivity implements View.OnClickLis
         timeMap.add(5);
         timeMap.add(125);
         // TBI: returnToMenu.setVisibility(View.INVISIBLE);
-
     }
 
+    //set actions for each button
     @Override
     public void onClick(View v) {
-
             if (v.getId() == R.id.button_timerview_start) {
+                //set and start timer interval
                 setTimer();
                 buttonStartTime.setVisibility(View.INVISIBLE);
                 buttonStopTime.setVisibility(View.VISIBLE);
@@ -72,7 +69,7 @@ public class Timer_Activity extends AppCompatActivity implements View.OnClickLis
                 mProgressBar1.setVisibility(View.VISIBLE);
 
             } else if (v.getId() == R.id.button_timerview_stop) {
-
+                //timer stop button
                 countDownTimer.cancel();
                 countDownTimer.onFinish();
                 mProgressBar1.setVisibility(View.GONE);
@@ -84,9 +81,11 @@ public class Timer_Activity extends AppCompatActivity implements View.OnClickLis
 
             }//TBI: else if (v.getId() == R.id.ReturnToMenu){}
     }
+    //pulls timers from time map queue.
+    //Continues to pull timers until there are no more left
     private void setTimer(){
         int time = 0;
-
+        //if there are still elements, poll it and set it equal to time. Else, tell user there are no more timers
         if (!timeMap.isEmpty()) {
             time = timeMap.poll();
         } else Toast.makeText(Timer_Activity.this, "Nothing left!", Toast.LENGTH_LONG).show();
@@ -94,18 +93,21 @@ public class Timer_Activity extends AppCompatActivity implements View.OnClickLis
         mProgressBar1.setMax(time * 1000);
 
     }
-
+    //timer function, countdown timer that changes a circular progress bar according to time remaining
     private void startTimer() {
+
         countDownTimer = new CountDownTimer(totalTimeCountInMilliseconds, 1) {
             @Override
+            //sets progress bar in gui
             public void onTick(long leftTimeInMilliseconds) {
                 long seconds = leftTimeInMilliseconds / 1000;
                 mProgressBar1.setProgress((int) (leftTimeInMilliseconds));
                 textViewShowTime.setText(String.format("%02d", seconds / 60) + ":" + String.format("%02d", seconds % 60));
             }
-
+            //runs when timer completes
             @Override
             public void onFinish() {
+                //prepares next timer, sets timer face to next timer
                 if(!timeMap.isEmpty()){
                     int minutes = timeMap.peek()/60, seconds = timeMap.peek() % 60;
                     if(minutes>=10){
@@ -122,16 +124,16 @@ public class Timer_Activity extends AppCompatActivity implements View.OnClickLis
                         }
                     }
                 } else {
+                    //if there are no more timers, tell user
                     textViewShowTime.setText("Done!");
                     //TBI: returnToMenu.setVisibility(View.VISIBLE);
                 }
-
+                //setting visibility for button and progress bars when timer finishes
                 textViewShowTime.setVisibility(View.VISIBLE);
                 buttonStartTime.setVisibility(View.VISIBLE);
                 buttonStopTime.setVisibility(View.VISIBLE);
                 mProgressBar.setVisibility(View.VISIBLE);
                 mProgressBar1.setVisibility(View.GONE);
-
             }
 
         }.start();

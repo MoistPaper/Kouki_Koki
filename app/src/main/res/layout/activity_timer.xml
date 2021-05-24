@@ -1,65 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
-    android:background="@color/colorPrimaryDark"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     android:fitsSystemWindows="true">
 
     <ProgressBar
         android:id="@+id/progressbar_timerview"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="600dp"
-        android:layout_height="600dp"
-        android:layout_centerInParent="true"
+        android:layout_width="411dp"
+        android:layout_height="363dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_gravity="bottom|center_horizontal"
         android:alpha="1"
         android:indeterminate="false"
-        android:progressDrawable="@drawable/circleshape2_timerview" />
+        android:progressDrawable="@drawable/circleshape2_timerview"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" />
 
     <TextView
         android:id="@+id/textView_timerview_time"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:alpha="1"
         android:background="@drawable/circleshape_timerview"
         android:gravity="center"
         android:text="00:00"
         android:textColor="@android:color/white"
         android:textSize="40sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressbar1_timerview"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="500dp"
         android:layout_height="500dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:layout_gravity="center_horizontal|center"
         android:indeterminate="false"
         android:progressDrawable="@drawable/circleshape1_timerview"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_timerview_start"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
         android:layout_marginBottom="187dp"
         android:background="@android:color/transparent"
         android:text="Start !"
         android:textAllCaps="false"
         android:textSize="20sp"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_timerview_stop"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="126dp"
         android:background="@android:color/transparent"
@@ -67,24 +83,29 @@
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textStyle="italic"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/ReturnToMenu"
         android:layout_width="143dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="130dp"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="582dp"
-        android:layout_marginEnd="137dp"
-        android:layout_marginRight="137dp"
-        android:layout_marginBottom="82dp"
-        android:text="Back To Menu" />
+        android:layout_marginStart="137dp"
+        android:layout_marginLeft="137dp"
+        android:layout_marginTop="87dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginRight="131dp"
+        android:layout_marginBottom="588dp"
+        android:text="Back To Menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+</RelativeLayout >
