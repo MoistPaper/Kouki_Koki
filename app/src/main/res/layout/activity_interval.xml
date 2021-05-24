@@ -13,7 +13,7 @@
         android:layout_height="102dp"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:theme="@style/Theme.Kouki"
+        android:theme="@style/Theme.Kouki_Koki"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -24,7 +24,7 @@
         android:layout_height="102dp"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:theme="@style/Theme.Kouki"
+        android:theme="@style/Theme.Kouki_Koki"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -40,7 +40,7 @@
         android:gravity="center"
         android:text="Minutes"
         android:textColor="@color/white"
-        android:theme="@style/Theme.Kouki"
+        android:theme="@style/Theme.Kouki_Koki"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,7 +54,7 @@
         android:gravity="center"
         android:text="Seconds"
         android:textColor="@color/white"
-        android:theme="@style/Theme.Kouki"
+        android:theme="@style/Theme.Kouki_Koki"
         app:layout_constraintEnd_toEndOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="@+id/textView" />
 
