@@ -1,5 +1,5 @@
 
-package com.example.kouki_kouki;
+package com.example.kouki_koki;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
