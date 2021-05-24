@@ -1,4 +1,5 @@
-package com.example.kouki;
+
+package com.example.kouki_kouki;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -60,3 +61,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
+
+
