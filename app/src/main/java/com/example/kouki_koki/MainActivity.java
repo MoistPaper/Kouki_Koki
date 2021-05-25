@@ -1,3 +1,6 @@
+/*
+This is the cover page for the app, and the first activity the user will see. It is the welcome page and includes a randomly generated quote
+ */
 package com.example.kouki_koki;
 
 import android.content.Intent;
