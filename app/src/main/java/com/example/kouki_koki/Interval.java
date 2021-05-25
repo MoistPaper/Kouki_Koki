@@ -1,3 +1,6 @@
+/*
+This activity is created so that the user can set the amount of time he/she wants for each interval
+ */
 package com.example.kouki_koki;
 
 import androidx.appcompat.app.AppCompatActivity;
