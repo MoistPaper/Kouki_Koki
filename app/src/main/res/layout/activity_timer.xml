@@ -52,11 +52,12 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="187dp"
-        android:background="@android:color/transparent"
+        android:background="@drawable/button_rounded"
         android:text="Start !"
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textStyle="italic"
+        app:backgroundTint="#E88E8E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -66,12 +67,14 @@
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="126dp"
-        android:background="@android:color/transparent"
+        android:background="@drawable/button_rounded"
         android:text="Stop !"
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textStyle="italic"
+        android:translationY="10dp"
         android:visibility="invisible"
+        app:backgroundTint="#E88E8E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -80,12 +83,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:background="@android:color/transparent"
+        android:background="@drawable/button_rounded"
         android:text="Back To Menu"
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textStyle="italic"
-        android:translationY="550dp"
+        android:translationY="680dp"
+        app:backgroundTint="#E88E8E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

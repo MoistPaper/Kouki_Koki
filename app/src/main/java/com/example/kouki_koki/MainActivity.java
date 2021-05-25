@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
     public void start(View v){
-        Intent intent = new Intent(this, home.class);
+        Intent intent = new Intent(this, Home.class);
         startActivity(intent);
     }
 }

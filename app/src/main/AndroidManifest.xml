@@ -3,6 +3,7 @@
     package="com.example.kouki_koki">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -11,8 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kouki_Koki">
-        <activity android:name=".interval"></activity>
-        <activity android:name=".home" />
+        <activity android:name=".Interval"></activity>
+        <activity android:name=".Home" />
         <activity android:name=".Timer_Activity" />
         <activity android:name=".MainActivity">
             <intent-filter>

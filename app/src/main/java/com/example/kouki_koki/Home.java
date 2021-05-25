@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
-public class home extends AppCompatActivity {
+public class Home extends AppCompatActivity {
     private NumberPicker numberPicker;
     private TextView textView;
     private int session = 1;
@@ -35,7 +35,7 @@ public class home extends AppCompatActivity {
         });
     }
     public void start(View v){
-        Intent intent = new Intent(this, interval.class);
+        Intent intent = new Intent(this, Interval.class);
         intent.putExtra("session",session);
         startActivity(intent);
         finish();

@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class interval extends AppCompatActivity {
+public class Interval extends AppCompatActivity {
     private int minute;
     private int seconds;
     private int session=0;

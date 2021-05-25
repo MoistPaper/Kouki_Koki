@@ -1,7 +1,14 @@
 package com.example.kouki_koki;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.AudioAttributes;
+import android.media.MediaPlayer;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -13,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -21,13 +29,14 @@ import java.util.Queue;
 
 public class Timer_Activity extends AppCompatActivity implements View.OnClickListener {
     private Button buttonStartTime, buttonStopTime, returnToMenu;
-    //private EditText edtTimerValue;
     private TextView textViewShowTime;
     private CountDownTimer countDownTimer;
     private long totalTimeCountInMilliseconds;
     private Queue<Integer> timeMap = new LinkedList<>();
     int i = -1;
     ProgressBar mProgressBar, mProgressBar1;
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +62,9 @@ public class Timer_Activity extends AppCompatActivity implements View.OnClickLis
         mProgressBar = (ProgressBar) findViewById(R.id.progressbar_timerview);
         mProgressBar1 = (ProgressBar) findViewById(R.id.progressbar1_timerview);
         textViewShowTime.setTypeface(MRegular);
-
         returnToMenu.setVisibility(View.INVISIBLE);
 
+        //returns to front page after timer is done (user clicks screen)
         returnToMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +82,6 @@ public class Timer_Activity extends AppCompatActivity implements View.OnClickLis
                 buttonStartTime.setVisibility(View.INVISIBLE);
                 buttonStopTime.setVisibility(View.VISIBLE);
                 mProgressBar.setVisibility(View.INVISIBLE);
-
                 startTimer();
 
                 mProgressBar1.setVisibility(View.VISIBLE);
@@ -146,5 +154,7 @@ public class Timer_Activity extends AppCompatActivity implements View.OnClickLis
 
         }.start();
     }
+
+
 
 }
