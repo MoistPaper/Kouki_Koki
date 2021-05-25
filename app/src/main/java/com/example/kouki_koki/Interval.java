@@ -1,23 +1,18 @@
+/*
+This activity is created so that the user can set the amount of time he/she wants for each interval
+ */
 package com.example.kouki_koki;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.NumberPicker;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.util.Calendar;
-
 public class Interval extends AppCompatActivity {
-    //Instantiage widgets and variables
+    //Instantiate widgets and variables
     private int minute;
     private int seconds;
     private int session=0;
@@ -35,13 +30,14 @@ public class Interval extends AppCompatActivity {
         sesh= new int[session];
         numberPickerMin = (NumberPicker) findViewById(R.id.numberPickerMin);
         numberPickerSec = (NumberPicker) findViewById(R.id.numberPickerSec);
-        //Set the values for the numberpickers
+        //Set default values for the numberpickers
         numberPickerMin.setMaxValue(59);
         numberPickerMin.setMinValue(0);
         numberPickerSec.setMaxValue(59);
         numberPickerSec.setMinValue(0);
         numberPickerSec.setValue(0);
         numberPickerMin.setValue(0);
+        //allowing user to change values
         numberPickerMin.setOnValueChangedListener(new NumberPicker.OnValueChangeListener()
         {
             @Override
@@ -75,7 +71,7 @@ public class Interval extends AppCompatActivity {
     //Final button to start timer activity with the interval data
     public void startTimer(View v){
         if(index>=session){
-            Intent intent = new Intent(this, Timer_Activity.class);
+            Intent intent = new Intent(this, TimerActivity.class);
             intent.putExtra("interval",sesh);
             startActivity(intent);
             finish();

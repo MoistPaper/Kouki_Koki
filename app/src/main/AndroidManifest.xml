@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Kouki_Koki">
         <activity android:name=".Interval"></activity>
         <activity android:name=".Home" />
-        <activity android:name=".Timer_Activity" />
+        <activity android:name=".TimerActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
