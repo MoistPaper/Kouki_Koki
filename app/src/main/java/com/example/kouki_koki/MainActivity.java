@@ -21,14 +21,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
+    //instantiate image asset
     ImageView img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Instantiate title and inspiration text while also set font for it
         TextView inspiration = (TextView) findViewById(R.id.titlepage);
         Typeface quicksand=Typeface.createFromAsset(getAssets(),"fonts/Quicksand-Regular.ttf");
         inspiration.setTypeface(quicksand);
+        //Pull quotes from API
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://zenquotes.io/api/random/";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         });
         queue.add(jsonArrayRequest);
     }
+    //OnClick attribute for button in order to go to next page
     public void start(View v){
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class Interval extends AppCompatActivity {
+    //Instantiage widgets and variables
     private int minute;
     private int seconds;
     private int session=0;
@@ -28,12 +29,13 @@ public class Interval extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interval);
+        //Get the number of sessions user picked from previous activity
         Intent intent = getIntent();
         session = intent.getIntExtra("session",0);
         sesh= new int[session];
         numberPickerMin = (NumberPicker) findViewById(R.id.numberPickerMin);
         numberPickerSec = (NumberPicker) findViewById(R.id.numberPickerSec);
-
+        //Set the values for the numberpickers
         numberPickerMin.setMaxValue(59);
         numberPickerMin.setMinValue(0);
         numberPickerSec.setMaxValue(59);
@@ -58,6 +60,7 @@ public class Interval extends AppCompatActivity {
         });
 
     }
+    //Set button in order to save the time intervals into an int array
     public void onset(View v){
         if(index<session){
             seconds+=minute*60;
@@ -69,6 +72,7 @@ public class Interval extends AppCompatActivity {
             Toast.makeText(this, "All sessions set! Please click start.", Toast.LENGTH_SHORT).show();
         }
     }
+    //Final button to start timer activity with the interval data
     public void startTimer(View v){
         if(index>=session){
             Intent intent = new Intent(this, Timer_Activity.class);
