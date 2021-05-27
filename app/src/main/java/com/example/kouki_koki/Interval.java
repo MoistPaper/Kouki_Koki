@@ -12,7 +12,7 @@ import android.widget.NumberPicker;
 import android.widget.Toast;
 
 public class Interval extends AppCompatActivity {
-    //Instantiate widgets and variables
+    //Declare widgets and variables
     private int minute;
     private int seconds;
     private int session=0;
@@ -37,7 +37,7 @@ public class Interval extends AppCompatActivity {
         numberPickerSec.setMinValue(0);
         numberPickerSec.setValue(0);
         numberPickerMin.setValue(0);
-        //allowing user to change values
+        //Allows user to change values
         numberPickerMin.setOnValueChangedListener(new NumberPicker.OnValueChangeListener()
         {
             @Override
@@ -56,7 +56,8 @@ public class Interval extends AppCompatActivity {
         });
 
     }
-    //Set button in order to save the time intervals into an int array
+    //Set button in order to save the time intervals into an int array, asks user for inputs until
+    //previously specified number of intervals is reached
     public void onset(View v){
         if(index<session){
             seconds+=minute*60;
@@ -69,6 +70,7 @@ public class Interval extends AppCompatActivity {
         }
     }
     //Final button to start timer activity with the interval data
+    //Only works when all session timers are set
     public void startTimer(View v){
         if(index>=session){
             Intent intent = new Intent(this, TimerActivity.class);

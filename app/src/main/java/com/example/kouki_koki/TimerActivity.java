@@ -27,7 +27,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private long totalTimeCountInMilliseconds;
     private Queue<Integer> timeMap = new LinkedList<>();
     private ProgressBar mProgressBar, mProgressBar1;
-    private MediaPlayer player;
+    private MediaPlayer player, player2;
     private Random ran = new Random();
 
 
@@ -37,12 +37,13 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_timer);
         Intent intent = getIntent();
         int[] arr = intent.getIntArrayExtra("interval");
+        //Converting array from previous activity into queue data type
         for(int x : arr){
             timeMap.add(x);
         }
-        //setting custom fonts
+        //Setting custom fonts
         Typeface MRegular = Typeface.createFromAsset(getAssets(),"fonts/Quicksand-Bold.ttf");
-        //link gui elements to code
+        //Link gui elements to code
         buttonStartTime = (Button) findViewById(R.id.button_timerview_start);
         buttonStopTime = (Button) findViewById(R.id.button_timerview_stop);
         returnToMenu = (Button) findViewById(R.id.ReturnToMenu);
@@ -55,11 +56,12 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         mProgressBar1 = (ProgressBar) findViewById(R.id.progressbar1_timerview);
         textViewShowTime.setTypeface(MRegular);
         returnToMenu.setVisibility(View.INVISIBLE);
-        //splitting song into two smaller files (github)
+        //Splitting song into two smaller players (so we can upload to github)
         player = MediaPlayer.create(this,R.raw.song);
+        player2 = MediaPlayer.create(this, R.raw.song1);
         Intent intent2 = new Intent(this, MainActivity.class);
 
-        //returns to front page after timer is done (user clicks screen)
+        //Returns to front page after timer is done (user clicks screen)
         returnToMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,22 +72,22 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    //set actions for each button
+    //Set actions for each button
     @Override
     public void onClick(View v) {
             if (v.getId() == R.id.button_timerview_start) {
-                //set and start timer interval
+                //set timer interval, set button visibilities
                 setTimer();
                 buttonStartTime.setVisibility(View.INVISIBLE);
                 buttonStopTime.setVisibility(View.VISIBLE);
                 mProgressBar.setVisibility(View.INVISIBLE);
+                //play music, start timer
                 play1();
                 startTimer();
-
                 mProgressBar1.setVisibility(View.VISIBLE);
 
             } else if (v.getId() == R.id.button_timerview_stop) {
-                //timer stop button
+                //timer stop button and set button visibilities
                 countDownTimer.cancel();
                 countDownTimer.onFinish();
                 mProgressBar1.setVisibility(View.GONE);
@@ -95,11 +97,11 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
             }
     }
-    //pulls timers from time map queue.
+    //Pulls timers from time map queue.
     //Continues to pull timers until there are no more left
     private void setTimer(){
         int time = 0;
-        //if there are still elements, poll it and set it equal to time. Else, tell user there are no more timers
+        //If there are still elements, poll it and set it equal to time. Else, tell user there are no more timers
         if (!timeMap.isEmpty()) {
             time = timeMap.poll();
         } else Toast.makeText(TimerActivity.this, "Nothing left!", Toast.LENGTH_LONG).show();
@@ -107,21 +109,21 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         mProgressBar1.setMax(time * 1000);
 
     }
-    //timer function, countdown timer that changes a circular progress bar according to time remaining
+    //Timer function, countdown timer that changes a circular progress bar according to time remaining
     private void startTimer() {
 
         countDownTimer = new CountDownTimer(totalTimeCountInMilliseconds, 1) {
             @Override
-            //sets progress bar in gui
+            //Sets progress bar in gui
             public void onTick(long leftTimeInMilliseconds) {
                 long seconds = leftTimeInMilliseconds / 1000;
                 mProgressBar1.setProgress((int) (leftTimeInMilliseconds));
                 textViewShowTime.setText(String.format("%02d", seconds / 60) + ":" + String.format("%02d", seconds % 60));
             }
-            //runs when timer completes
+            //Runs when timer completes
             @Override
             public void onFinish() {
-                //prepares next timer, sets timer face to next timer
+                //Prepares next timer, sets timer face to next timer
                 if(!timeMap.isEmpty()){
                     int minutes = timeMap.peek()/60, seconds = timeMap.peek() % 60;
                     if(minutes>=10){
@@ -138,12 +140,12 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 } else {
-                    //if there are no more timers, tell user
+                    //If there are no more timers, tell user
                     textViewShowTime.setText("Done!");
                     returnToMenu.setVisibility(View.VISIBLE);
                     pause();
                 }
-                //setting visibility for button and progress bars when timer finishes
+                //Setting visibility for button and progress bars when timer finishes
                 textViewShowTime.setVisibility(View.VISIBLE);
                 buttonStartTime.setVisibility(View.VISIBLE);
                 buttonStopTime.setVisibility(View.INVISIBLE);
@@ -154,15 +156,14 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
         }.start();
     }
-    //plays music file
+    //Plays music file
     public void play1(){
         if(player == null){
-            //splitting songs into smaller files
-
             player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
-                    stopPlayer();
+                    //When first is complete, play second
+                    play2();
                 }
             });
 
@@ -170,11 +171,29 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
         player.start();
     }
+    //Plays music file 2
+    public void play2(){
+        if(player2 == null){
+            player2.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    //Stop player once file is done
+                    stopPlayer();
+                }
+            });
 
-    //pauses song, only does so if player has song playing
+        }
+
+        player2.start();
+    }
+
+    //Pauses song, only does so if player has song playing
     private void pause(){
-        if(player!= null){
+        if(player != null){
             player.pause();
+        }
+        if(player2 != null){
+            player2.pause();
         }
 
     }
@@ -184,9 +203,13 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             player.release();
             player = null;
         }
+        if(player2 != null){
+            player2.release();
+            player2 = null;
+        }
 
     }
-    //java magic
+    //java magic, need to do something in the superclass...
     @Override
     protected void onStop() {
         super.onStop();

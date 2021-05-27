@@ -13,7 +13,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 public class Home extends AppCompatActivity {
-    //Instantiate widgets and variables
+    //Declare widgets and variables
     private NumberPicker numberPicker;
     private TextView textView;
     private int session = 1;
