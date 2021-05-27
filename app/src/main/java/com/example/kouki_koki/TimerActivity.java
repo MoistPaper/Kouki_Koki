@@ -76,18 +76,18 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
             if (v.getId() == R.id.button_timerview_start) {
-                //set timer interval, set button visibilities
+                //Set timer interval, set button visibilities
                 setTimer();
                 buttonStartTime.setVisibility(View.INVISIBLE);
                 buttonStopTime.setVisibility(View.VISIBLE);
                 mProgressBar.setVisibility(View.INVISIBLE);
-                //play music, start timer
+                //Play music, start timer
                 play1();
                 startTimer();
                 mProgressBar1.setVisibility(View.VISIBLE);
 
             } else if (v.getId() == R.id.button_timerview_stop) {
-                //timer stop button and set button visibilities
+                //Timer stop button and set button visibilities
                 countDownTimer.cancel();
                 countDownTimer.onFinish();
                 mProgressBar1.setVisibility(View.GONE);
