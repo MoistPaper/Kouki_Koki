@@ -1,9 +1,14 @@
 # Kouki_Koki_Timer_App
 For ICS4UP, a god-like timer utilizing Java magic and inspiration in order to save your productivity life
-Spaced repetition "timemaps" allow consective work sessions to occur
+
+Spaced repetition "timemaps" allow consecutive work sessions to occur
+
 Quotes keep you motivated haha
+
 Piano background music keeps you relaxed
+
 Have fun, study, move around, or whatever
+
 Kouki-koki, time management app.
 
 **KKTMA**
