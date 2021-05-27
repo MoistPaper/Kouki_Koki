@@ -24,7 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
-    //instantiate image asset
+    //declare image asset
     ImageView img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         TextView inspiration = (TextView) findViewById(R.id.titlepage);
         Typeface quicksand=Typeface.createFromAsset(getAssets(),"fonts/Quicksand-Regular.ttf");
         inspiration.setTypeface(quicksand);
-        //Pull quotes from API
+        //Request quotes from API
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://zenquotes.io/api/random/";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-            }
+            }//java magic code (error handler)
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
